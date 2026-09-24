@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dwristomn24w1" path="res://scripts/player/player.gd" id="1_8afob"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_67xdi"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_jyhfs"]
 radius = 30.0
 
-[node name="Player" type="CharacterBody2D" unique_id=109235569]
+[node name="Player" type="CharacterBody2D" unique_id=109235569 groups=["player"]]
 position = Vector2(576, 324)
 script = ExtResource("1_8afob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1816041652]
-shape = SubResource("CircleShape2D_67xdi")
+shape = SubResource("CircleShape2D_jyhfs")
