@@ -34,7 +34,7 @@ func _draw():
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
-		if body.player_size > asteroid_size:
+		if body.player_size >= asteroid_size:
 			body.collect_mass(mass)
 			get_parent().asteroid_collected()
 			queue_free()

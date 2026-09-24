@@ -20,6 +20,15 @@ func _physics_process(_delta):
 func collect_mass(amount: float):
 	mass += amount
 	
+	if mass >= 80:
+		player_size = 4
+	elif mass >= 40:
+		player_size = 3
+	elif mass >= 20:
+		player_size = 2
+	else:
+		player_size = 1
+	
 	var player_radius = 30.0 + (mass - 10.0) * 3.0
 	$CollisionShape2D.shape.radius = player_radius
 	
