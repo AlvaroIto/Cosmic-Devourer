@@ -10,6 +10,7 @@ var player: Node2D
 
 func _ready():
 	setup_by_size()
+	$CollisionShape2D.shape.radius = radius
 	queue_redraw()
 	player = get_tree().get_first_node_in_group("player")
 
