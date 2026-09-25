@@ -22,8 +22,19 @@ func spawn_asteroid():
 		if new_position.distance_to(player.position) > 150.0:
 			break
 
-	asteroid.position = new_position
+	if player.player_size == 1:
+		asteroid.asteroid_size = 1
 
+	elif player.player_size == 2:
+		asteroid.asteroid_size = randi_range(1, 2)
+
+	elif player.player_size == 3:
+		asteroid.asteroid_size = randi_range(1, 3)
+
+	else:
+		asteroid.asteroid_size = randi_range(1, 4)
+		
+	asteroid.position = new_position
 	add_child(asteroid)
 
 func asteroid_collected():
