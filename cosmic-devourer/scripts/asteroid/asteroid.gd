@@ -51,10 +51,13 @@ func _draw():
 	draw_circle(Vector2.ZERO, radius, Color(0.45, 0.45, 0.45))
 	draw_circle(Vector2(-2, -2), radius * 0.25, Color(0.30, 0.30, 0.30))
 
-
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		if body.player_size >= asteroid_size:
 			body.collect_mass(mass)
+			break_apart()
 			get_parent().asteroid_collected()
 			queue_free()
+
+func break_apart():
+	print("Asteroide quebrando! Tamanho: ", asteroid_size)
