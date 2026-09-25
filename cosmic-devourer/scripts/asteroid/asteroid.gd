@@ -9,6 +9,7 @@ var player: Node2D
 
 
 func _ready():
+	setup_by_size()
 	queue_redraw()
 	player = get_tree().get_first_node_in_group("player")
 
@@ -26,6 +27,24 @@ func _physics_process(delta):
 		var force = gravity_force * (player.mass / 10.0)
 
 		global_position += direction * force * delta
+
+func setup_by_size():
+	match asteroid_size:
+		1:
+			mass = 1.0
+			radius = 8.0
+
+		2:
+			mass = 5.0
+			radius = 15.0
+
+		3:
+			mass = 15.0
+			radius = 25.0
+
+		4:
+			mass = 40.0
+			radius = 40.0
 
 func _draw():
 	draw_circle(Vector2.ZERO, radius, Color(0.45, 0.45, 0.45))
