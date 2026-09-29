@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var asteroid_scene: PackedScene
-@export var asteroid_count: int = 5
+@export var asteroid_count: int = 15
 
 func _ready():
 	for i in range(asteroid_count):
@@ -39,3 +39,14 @@ func spawn_asteroid():
 
 func asteroid_collected():
 	spawn_asteroid()
+
+func _process(_delta):
+	maintain_asteroids()
+
+func maintain_asteroids():
+	var asteroids = get_tree().get_nodes_in_group("asteroids")
+
+	while asteroids.size() < asteroid_count:
+		spawn_asteroid()
+		asteroids = get_tree().get_nodes_in_group("asteroids")
+		

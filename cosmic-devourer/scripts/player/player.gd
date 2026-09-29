@@ -29,7 +29,7 @@ func collect_mass(amount: float):
 	else:
 		player_size = 1
 	
-	var player_radius = 30.0 + (mass - 10.0) * 3.0
+	var player_radius = 30.0 + (mass - 10.0) * 0.8
 	$CollisionShape2D.shape.radius = player_radius
 	
 	var gravity_range = gravity_range_base + (mass - 10.0) * gravity_range_per_mass
@@ -54,7 +54,7 @@ func _draw():
 		2.0
 	)
 	
-	var player_radius = 30.0 + (mass - 10.0) * 3.0
+	var player_radius = 30.0 + (mass - 10.0) * 0.8
 
 	draw_circle(Vector2.ZERO, player_radius, Color(0.35, 0.35, 0.35))
 	draw_circle(Vector2(-10, -8), 5.0, Color(0.22, 0.22, 0.22))

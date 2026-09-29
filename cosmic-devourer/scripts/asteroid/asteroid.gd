@@ -13,6 +13,7 @@ var can_respawn: bool = true
 func _ready():
 	setup_by_size()
 	$CollisionShape2D.shape.radius = radius
+	add_to_group("asteroids")
 	queue_redraw()
 	player = get_tree().get_first_node_in_group("player")
 
