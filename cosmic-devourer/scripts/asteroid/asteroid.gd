@@ -6,14 +6,15 @@ extends Area2D
 @export var gravity_force: float = 100.0
 
 var player: Node2D
-
+var velocity: Vector2 = Vector2.ZERO
+var fragment_velocity: Vector2 = Vector2.ZERO
+var can_respawn: bool = true
 
 func _ready():
 	setup_by_size()
 	$CollisionShape2D.shape.radius = radius
 	queue_redraw()
 	player = get_tree().get_first_node_in_group("player")
-
 
 func _physics_process(delta):
 	if player == null:
@@ -28,6 +29,7 @@ func _physics_process(delta):
 		var force = gravity_force * (player.mass / 10.0)
 
 		global_position += direction * force * delta
+	global_position += velocity * delta
 
 func setup_by_size():
 	match asteroid_size:
@@ -55,9 +57,32 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		if body.player_size >= asteroid_size:
 			body.collect_mass(mass)
+
+		if asteroid_size > 1:
 			break_apart()
+		elif can_respawn:
 			get_parent().asteroid_collected()
-			queue_free()
+
+		queue_free()
 
 func break_apart():
 	print("Asteroide quebrando! Tamanho: ", asteroid_size)
+
+	if asteroid_size <= 1:
+		return
+
+	for i in range(3):
+		var fragment = get_parent().asteroid_scene.instantiate()
+
+		fragment.asteroid_size = asteroid_size - 1
+		fragment.can_respawn = false
+
+		var angle = (TAU / 3.0) * i
+		var direction = Vector2(cos(angle), sin(angle))
+
+		get_parent().add_child(fragment)
+
+		fragment.global_position = global_position + direction * (radius + 30.0)
+		fragment.fragment_velocity = direction * 150.0
+
+		get_parent().add_child(fragment)
