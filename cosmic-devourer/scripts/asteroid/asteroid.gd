@@ -29,7 +29,8 @@ func _physics_process(delta):
 		var force = gravity_force * (player.mass / 10.0)
 
 		global_position += direction * force * delta
-	global_position += velocity * delta
+	
+	global_position += fragment_velocity * delta
 
 func setup_by_size():
 	match asteroid_size:

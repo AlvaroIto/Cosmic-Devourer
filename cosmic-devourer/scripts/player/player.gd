@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 @export var speed: float = 300.0
 @export var mass: float = 10.0
-@export var gravity_range_base: float = 75.0
-@export var gravity_range_per_mass: float = 3.0
+@export var gravity_range_base: float = 0
+@export var gravity_range_per_mass: float = 0
 @export var player_size: int = 1
 
 func _physics_process(_delta):
