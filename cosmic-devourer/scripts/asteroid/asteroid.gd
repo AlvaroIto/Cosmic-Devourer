@@ -83,6 +83,8 @@ func break_apart():
 		var direction = Vector2(cos(angle), sin(angle))
 
 		get_parent().add_child(fragment)
+		
+		fragment.mass = mass / 3.0
 
 		fragment.global_position = global_position + direction * (radius + 30.0)
 		fragment.fragment_velocity = direction * 150.0
