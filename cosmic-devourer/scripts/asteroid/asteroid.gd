@@ -12,10 +12,11 @@ var can_respawn: bool = true
 
 func _ready():
 	setup_by_size()
-	$CollisionShape2D.shape.radius = radius
+	update_from_mass()
 	add_to_group("asteroids")
 	queue_redraw()
 	player = get_tree().get_first_node_in_group("player")
+	velocity = Vector2.from_angle(randf_range(0.0, TAU)) * randf_range(20.0, 50.0)
 
 func _physics_process(delta):
 	if player == null:
@@ -32,6 +33,11 @@ func _physics_process(delta):
 		global_position += direction * force * delta
 	
 	global_position += fragment_velocity * delta
+	
+	global_position += velocity * delta
+	
+	if global_position.x < -100 or global_position.x > 1300 or global_position.y < -100 or global_position.y > 700:
+		queue_free()
 
 func setup_by_size():
 	match asteroid_size:
@@ -51,6 +57,21 @@ func setup_by_size():
 			mass = 40.0
 			radius = 40.0
 
+func update_from_mass():
+	if mass < 10:
+		radius = 8.0
+	elif mass < 20:
+		radius = 15.0
+	elif mass < 30:
+		radius = 25.0
+	elif mass < 50:
+		radius = 35.0
+	else:
+		radius = 45.0
+
+	$CollisionShape2D.shape.radius = radius
+	queue_redraw()
+
 func _draw():
 	draw_circle(Vector2.ZERO, radius, Color(0.45, 0.45, 0.45))
 	draw_circle(Vector2(-2, -2), radius * 0.25, Color(0.30, 0.30, 0.30))
@@ -60,12 +81,12 @@ func _on_body_entered(body):
 		if body.player_size >= asteroid_size:
 			body.collect_mass(mass)
 
-		if asteroid_size > 1:
-			break_apart()
-		elif can_respawn:
-			get_parent().asteroid_collected()
+			if asteroid_size > 1:
+				break_apart()
+			elif can_respawn:
+				get_parent().asteroid_collected()
 
-		queue_free()
+			queue_free()
 
 func break_apart():
 	print("Asteroide quebrando! Tamanho: ", asteroid_size)
@@ -85,6 +106,7 @@ func break_apart():
 		get_parent().add_child(fragment)
 		
 		fragment.mass = mass / 3.0
+		fragment.update_from_mass()
 
 		fragment.global_position = global_position + direction * (radius + 30.0)
 		fragment.fragment_velocity = direction * 150.0

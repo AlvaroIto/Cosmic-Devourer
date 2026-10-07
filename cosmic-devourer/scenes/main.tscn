@@ -3,9 +3,14 @@
 [ext_resource type="Script" uid="uid://dr7abgt6t5rcs" path="res://scripts/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://chrnox86jpdn4" path="res://scenes/player/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://d0qidpgxsowkw" path="res://scenes/asteroid/asteroid.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://duhmsprvwc22a" path="res://scenes/enemies/Enemy.tscn" id="4_jyhfs"]
 
 [node name="Main" type="Node2D" unique_id=185801025]
 script = ExtResource("1_0wfyh")
 asteroid_scene = ExtResource("2_0wfyh")
 
 [node name="Player2" parent="." unique_id=109235569 instance=ExtResource("1_o5qli")]
+
+[node name="Enemy" parent="." unique_id=223922813 instance=ExtResource("4_jyhfs")]
+position = Vector2(700, 350)
+up_direction = Vector2(0.0033333148, 0.9999944)
