@@ -88,6 +88,15 @@ func _on_body_entered(body):
 
 			queue_free()
 
+	elif body.is_in_group("enemies"):
+		if body.mass >= mass:
+			body.collect_mass(mass)
+
+			if asteroid_size > 1:
+				break_apart()
+
+			queue_free()
+
 func break_apart():
 	print("Asteroide quebrando! Tamanho: ", asteroid_size)
 

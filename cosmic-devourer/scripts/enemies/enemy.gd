@@ -7,6 +7,7 @@ var direction: Vector2 = Vector2.ZERO
 
 func _ready():
 	update_from_mass()
+	add_to_group("enemies")
 	queue_redraw()
 	direction = Vector2.from_angle(randf_range(0.0, TAU))
 
@@ -30,3 +31,10 @@ func _draw():
 func _physics_process(_delta):
 	velocity = direction * speed
 	move_and_slide()
+
+	if global_position.x < -100 or global_position.x > 1300 or global_position.y < -100 or global_position.y > 700:
+		direction = global_position.direction_to(Vector2(600, 350))
+
+func collect_mass(amount: float):
+	mass += amount
+	update_from_mass()
