@@ -11,7 +11,3 @@ asteroid_scene = ExtResource("2_0wfyh")
 enemy_scene = ExtResource("4_jyhfs")
 
 [node name="Player2" parent="." unique_id=109235569 instance=ExtResource("1_o5qli")]
-
-[node name="Enemy" parent="." unique_id=223922813 instance=ExtResource("4_jyhfs")]
-position = Vector2(700, 350)
-up_direction = Vector2(0.003333315, 0.99999446)

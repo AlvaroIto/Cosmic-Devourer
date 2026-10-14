@@ -20,8 +20,8 @@ func spawn_asteroid():
 
 	while true:
 		new_position = Vector2(
-			randf_range(100.0, 1100.0),
-			randf_range(100.0, 600.0)
+			randf_range(100.0, 1820.0),
+			randf_range(100.0, 980.0)
 		)
 
 		if new_position.distance_to(player.position) > 150.0:
