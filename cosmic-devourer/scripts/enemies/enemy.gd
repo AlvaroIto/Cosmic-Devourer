@@ -49,10 +49,12 @@ func collect_mass(amount: float):
 	mass += amount
 	update_from_mass()
 
+
 func find_target():
 	target = null
 	var closest_distance = INF
 
+	# Procurar asteroides menores
 	for asteroid in get_tree().get_nodes_in_group("asteroids"):
 		if asteroid.mass < mass:
 			var distance = global_position.distance_to(asteroid.global_position)
@@ -60,3 +62,15 @@ func find_target():
 			if distance < closest_distance:
 				closest_distance = distance
 				target = asteroid
+
+	# Procurar outros Enemies menores
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if enemy == self:
+			continue
+
+		if enemy.mass < mass:
+			var distance = global_position.distance_to(enemy.global_position)
+
+			if distance < closest_distance:
+				closest_distance = distance
+				target = enemy

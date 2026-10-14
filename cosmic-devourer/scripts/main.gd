@@ -2,10 +2,15 @@ extends Node2D
 
 @export var asteroid_scene: PackedScene
 @export var asteroid_count: int = 15
+@export var enemy_scene: PackedScene
+@export var enemy_count: int = 5
 
 func _ready():
 	for i in range(asteroid_count):
 		spawn_asteroid()
+
+	for i in range(enemy_count):
+		spawn_enemy()
 
 func spawn_asteroid():
 	var asteroid = asteroid_scene.instantiate()
@@ -50,3 +55,20 @@ func maintain_asteroids():
 		spawn_asteroid()
 		asteroids = get_tree().get_nodes_in_group("asteroids")
 		
+
+func spawn_enemy():
+	var enemy = enemy_scene.instantiate()
+	var new_position = Vector2.ZERO
+	var player = get_tree().get_first_node_in_group("player")
+
+	while true:
+		new_position = Vector2(
+			randf_range(100.0, 1100.0),
+			randf_range(100.0, 600.0)
+		)
+
+		if new_position.distance_to(player.position) > 200.0:
+			break
+
+	enemy.position = new_position
+	add_child(enemy)
