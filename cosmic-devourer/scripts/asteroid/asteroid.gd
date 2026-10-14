@@ -36,7 +36,7 @@ func _physics_process(delta):
 	
 	global_position += velocity * delta
 	
-	if global_position.x < -100 or global_position.x > 1300 or global_position.y < -100 or global_position.y > 700:
+	if global_position.x < -100 or global_position.x > 2020 or global_position.y < -100 or global_position.y > 1180:
 		queue_free()
 
 func setup_by_size():
