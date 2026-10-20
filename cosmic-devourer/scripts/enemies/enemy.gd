@@ -56,14 +56,21 @@ func _physics_process(_delta):
 	velocity = direction * speed
 	move_and_slide()
 
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		var body = collision.get_collider()
+
+		if body is CharacterBody2D and body.is_in_group("enemies"):
+			if body != self and mass > body.mass:
+				collect_mass(body.mass)
+				body.queue_free()
+
 	if global_position.x < -100 or global_position.x > 2020 or global_position.y < -100 or global_position.y > 1180:
 		direction = global_position.direction_to(Vector2(960, 540))
 
 func collect_mass(amount: float):
 	mass += amount
 	update_from_mass()
-
-
 
 func find_target():
 	target = null
