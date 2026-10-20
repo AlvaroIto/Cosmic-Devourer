@@ -39,22 +39,37 @@ func _physics_process(_delta):
 		if randf() < 0.02:
 			direction = Vector2.from_angle(randf_range(0.0, TAU))
 
+	var avoidance = Vector2.ZERO
+
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if enemy == self:
+			continue
+
+		var distance = global_position.distance_to(enemy.global_position)
+
+		if distance > 0 and distance < 100:
+			avoidance += (global_position - enemy.global_position).normalized() * (100.0 - distance) / 100.0
+
+	if avoidance != Vector2.ZERO:
+		direction = (direction + avoidance.normalized() * 1.5).normalized()
+
 	velocity = direction * speed
 	move_and_slide()
 
-	if global_position.x < -100 or global_position.x > 1300 or global_position.y < -100 or global_position.y > 700:
-		direction = global_position.direction_to(Vector2(600, 350))
+	if global_position.x < -100 or global_position.x > 2020 or global_position.y < -100 or global_position.y > 1180:
+		direction = global_position.direction_to(Vector2(960, 540))
 
 func collect_mass(amount: float):
 	mass += amount
 	update_from_mass()
 
 
+
 func find_target():
 	target = null
 	var closest_distance = INF
 
-	# Procurar asteroides menores
+	# Prioridade 1: procurar asteroides menores
 	for asteroid in get_tree().get_nodes_in_group("asteroids"):
 		if asteroid.mass < mass:
 			var distance = global_position.distance_to(asteroid.global_position)
@@ -63,7 +78,11 @@ func find_target():
 				closest_distance = distance
 				target = asteroid
 
-	# Procurar outros Enemies menores
+	# Se encontrou um asteroide, manter esse alvo
+	if target != null:
+		return
+
+	# Prioridade 2: procurar outros Enemies menores
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		if enemy == self:
 			continue
