@@ -57,14 +57,16 @@ func _physics_process(_delta):
 			continue
 
 		var difference = mass - body.mass
+		var impact_direction = (body.global_position - global_position).normalized()
 
 		if difference > 0:
-			var impact_direction = (body.global_position - global_position).normalized()
-			var push_force = clamp(difference * 3.0, 80.0, 400.0)
-
+			var push_force = clamp(difference * 5.0, 100.0, 400.0)
 			body.velocity += impact_direction * push_force
-			collect_mass(body.mass)
-			body.queue_free()
+
+			if difference >= body.mass:
+				collect_mass(body.mass)
+				body.queue_free()
+
 
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
