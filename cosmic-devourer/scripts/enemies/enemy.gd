@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var speed: float = 100.0
 var direction: Vector2 = Vector2.ZERO
 var target: Node2D = null
+var impact_velocity: Vector2 = Vector2.ZERO
 
 func _ready():
 	update_from_mass()
@@ -39,9 +40,9 @@ func _physics_process(_delta):
 		if randf() < 0.02:
 			direction = Vector2.from_angle(randf_range(0.0, TAU))
 
-	velocity = direction * speed
+	velocity = direction * speed + impact_velocity
+	impact_velocity = impact_velocity.move_toward(Vector2.ZERO, 300.0 * _delta)
 	move_and_slide()
-
 
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
