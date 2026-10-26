@@ -42,14 +42,52 @@ func _physics_process(_delta):
 	velocity = direction * speed
 	move_and_slide()
 
+
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var body = collision.get_collider()
 
-		if body is CharacterBody2D and body.is_in_group("enemies"):
-			if body != self and mass > body.mass:
-				collect_mass(body.mass)
-				body.queue_free()
+		if not body is CharacterBody2D:
+			continue
+
+		if not body.is_in_group("enemies"):
+			continue
+
+		if body == self:
+			continue
+
+		var difference = mass - body.mass
+
+		if difference > 0:
+			var impact_direction = (body.global_position - global_position).normalized()
+			var push_force = clamp(difference * 3.0, 80.0, 400.0)
+
+			body.velocity += impact_direction * push_force
+			collect_mass(body.mass)
+			body.queue_free()
+
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		var body = collision.get_collider()
+
+		if not body is CharacterBody2D:
+			continue
+
+		if not body.is_in_group("enemies"):
+			continue
+
+		if body == self:
+			continue
+
+		var difference = mass - body.mass
+
+		if difference > 0:
+			var impact_direction = (body.global_position - global_position).normalized()
+			var push_force = clamp(difference * 3.0, 80.0, 400.0)
+
+			body.velocity += impact_direction * push_force
+			collect_mass(body.mass)
+			body.queue_free()
 
 	if global_position.x < -100 or global_position.x > 2020 or global_position.y < -100 or global_position.y > 1180:
 		direction = global_position.direction_to(Vector2(960, 540))
