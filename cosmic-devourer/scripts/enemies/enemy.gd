@@ -39,20 +39,6 @@ func _physics_process(_delta):
 		if randf() < 0.02:
 			direction = Vector2.from_angle(randf_range(0.0, TAU))
 
-	var avoidance = Vector2.ZERO
-
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if enemy == self:
-			continue
-
-		var distance = global_position.distance_to(enemy.global_position)
-
-		if distance > 0 and distance < 100:
-			avoidance += (global_position - enemy.global_position).normalized() * (100.0 - distance) / 100.0
-
-	if avoidance != Vector2.ZERO:
-		direction = (direction + avoidance.normalized() * 1.5).normalized()
-
 	velocity = direction * speed
 	move_and_slide()
 
