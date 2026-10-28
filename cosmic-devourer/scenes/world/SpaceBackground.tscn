@@ -1,3 +1,7 @@
 [gd_scene format=3 uid="uid://de4dxecmy4mh4"]
 
 [node name="SpaceBackground" type="Node2D" unique_id=1923642132]
+
+[node name="StarsLayer" type="Parallax2D" parent="." unique_id=1329090409]
+repeat_size = Vector2(512, 512)
+autoscroll = Vector2(0.3, 0.3)
