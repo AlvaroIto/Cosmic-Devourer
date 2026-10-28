@@ -6,6 +6,7 @@ extends CharacterBody2D
 var direction: Vector2 = Vector2.ZERO
 var target: Node2D = null
 var impact_velocity: Vector2 = Vector2.ZERO
+var impact_cooldown: float = 0.0
 
 func _ready():
 	update_from_mass()
@@ -62,12 +63,11 @@ func _physics_process(_delta):
 
 		if difference > 0:
 			var push_force = clamp(difference * 5.0, 100.0, 400.0)
-			body.velocity += impact_direction * push_force
+			body.impact_velocity += impact_direction * push_force
 
 			if difference >= body.mass:
 				collect_mass(body.mass)
 				body.queue_free()
-
 
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
