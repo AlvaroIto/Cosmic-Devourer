@@ -1,10 +1,9 @@
-extends Parallax2D
+extends Node2D
 
-@export var tile_size: float = 512.0
-@export var star_count: int = 100
+@export var tile_size: Vector2 = Vector2(1920, 1080)
+@export var star_count: int = 500
 
 func _ready():
-	repeat_size = Vector2(tile_size, tile_size)
 	queue_redraw()
 
 func _draw():
@@ -13,8 +12,8 @@ func _draw():
 
 	for i in range(star_count):
 		var pos = Vector2(
-			rng.randf_range(0.0, tile_size),
-			rng.randf_range(0.0, tile_size)
+			rng.randf_range(0.0, tile_size.x),
+			rng.randf_range(0.0, tile_size.y)
 		)
 
 		var radius = rng.randf_range(0.7, 1.8)

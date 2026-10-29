@@ -5,6 +5,8 @@
 [node name="SpaceBackground" type="Node2D" unique_id=1923642132]
 
 [node name="StarsLayer" type="Parallax2D" parent="." unique_id=1329090409]
-repeat_size = Vector2(512, 512)
+repeat_size = Vector2(1920, 1080)
 autoscroll = Vector2(0.3, 0.3)
+
+[node name="StarField" type="Node2D" parent="StarsLayer" unique_id=2121938140]
 script = ExtResource("1_helk3")

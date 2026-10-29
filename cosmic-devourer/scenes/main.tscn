@@ -4,10 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://chrnox86jpdn4" path="res://scenes/player/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://d0qidpgxsowkw" path="res://scenes/asteroid/asteroid.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://duhmsprvwc22a" path="res://scenes/enemies/Enemy.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://de4dxecmy4mh4" path="res://scenes/world/SpaceBackground.tscn" id="4_tbgi4"]
 
 [node name="Main" type="Node2D" unique_id=185801025]
 script = ExtResource("1_0wfyh")
 asteroid_scene = ExtResource("2_0wfyh")
 enemy_scene = ExtResource("4_jyhfs")
+
+[node name="SpaceBackground" parent="." unique_id=1923642132 instance=ExtResource("4_tbgi4")]
 
 [node name="Player2" parent="." unique_id=109235569 instance=ExtResource("1_o5qli")]
