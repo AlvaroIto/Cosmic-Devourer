@@ -17,7 +17,7 @@ func _draw():
 		)
 
 		var radius = rng.randf_range(0.7, 1.8)
-		var brightness = rng.randf_range(0.35, 0.9)
+		var brightness = rng.randf_range(0.15, 0.4)
 
 		draw_circle(
 			pos,
