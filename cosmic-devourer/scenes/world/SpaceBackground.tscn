@@ -2,19 +2,29 @@
 
 [ext_resource type="Script" uid="uid://nkd4hvkbqqh0" path="res://scripts/world/space_background.gd" id="1_helk3"]
 [ext_resource type="Script" uid="uid://ddwttruhsfwk4" path="res://scripts/world/distant_stars.gd" id="2_5th2y"]
+[ext_resource type="Script" uid="uid://dlhb2k3ynhwgv" path="res://scripts/world/foreground_stars.gd" id="3_1ccyw"]
 
 [node name="SpaceBackground" type="Node2D" unique_id=1923642132]
 
 [node name="StarsLayer" type="Parallax2D" parent="." unique_id=1329090409]
+scroll_scale = Vector2(0.3, 0.3)
 repeat_size = Vector2(1920, 1080)
-autoscroll = Vector2(0.3, 0.3)
 
 [node name="StarField" type="Node2D" parent="StarsLayer" unique_id=2121938140]
 script = ExtResource("1_helk3")
 
 [node name="DistantStarsLayer" type="Parallax2D" parent="." unique_id=1424782202]
+scroll_scale = Vector2(0.1, 0.1)
 repeat_size = Vector2(1920, 1080)
 autoscroll = Vector2(0.1, 0.1)
 
 [node name="StarField" type="Node2D" parent="DistantStarsLayer" unique_id=2107443219]
 script = ExtResource("2_5th2y")
+
+[node name="ForegroundStarsLayer" type="Parallax2D" parent="." unique_id=434352060]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(1920, 1080)
+
+[node name="StarField" type="Node2D" parent="ForegroundStarsLayer" unique_id=17229815]
+script = ExtResource("3_1ccyw")
+star_count = 500
